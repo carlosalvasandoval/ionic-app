@@ -1,0 +1,44 @@
+<ion-header no-border>  
+  <ion-navbar color="primary">
+    <main-header></main-header>
+  </ion-navbar>
+</ion-header>
+
+<ion-content >
+  <ion-card *ngFor="let promo of promos">
+    <ion-grid>
+      <ion-row>
+        <ion-col width-20>
+          <img src="http://www.abanoservicios.com/wp-content/uploads/2014/03/bembos.png" width="100%"/>
+        </ion-col>
+        <ion-col width-60></ion-col>
+        <ion-col width-20>
+          <h1>{{(100-promo.price/promo['old-price']*100).toFixed(0)}} %</h1>
+          OFF
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <img src="http://cdn7.larepublica.pe/sites/default/files/styles/img_620/public/imagen/2016/07/12/hamburguesas-Noticia-784896.jpg"/>
+    <ion-card-content>
+      <ion-card-title>
+        {{promo.title}}
+      </ion-card-title>
+      <p>
+        {{promo.subtitle}}
+      </p>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <h2>{{promo.moneda}} {{promo['old-price']}}</h2>
+            <p style="text-decoration: line-through">{{promo.moneda}} {{promo.price}}</p>
+          </ion-item>
+        </ion-col>
+
+        <ion-col center text-center>
+          <button ion-button color="secondary" (click)="promoTapped($event, promo)">Lo quiero</button>
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+
+  </ion-card>
+</ion-content>

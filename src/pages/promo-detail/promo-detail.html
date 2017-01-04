@@ -1,0 +1,58 @@
+<ion-header>
+  <ion-navbar>
+    <button menuToggle *ngIf="!selectedPromo">
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Detalle de promoción</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+  <h4 text-center *ngIf="selectedPromo">
+      <b>{{selectedPromo.title}}</b>
+  </h4>
+
+  <ion-card>
+    <ion-card-header>
+      ¿DÓNDE CANJEARLO?
+    </ion-card-header>
+    <ion-card-content>
+      <div #map id="map"></div>
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-card-header>
+      ¿CUÁL ES LA OFERTA PARA TI?
+    </ion-card-header>
+    <ion-card-content>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      REGLAS CLARAS, CONFIANZA ONLINE
+    </ion-card-header>
+    <ion-card-content>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>
+<ion-footer>
+  <ion-toolbar color="royal">
+    <ion-buttons start left>
+      <button ion-button icon-left color="royal">
+        <ion-icon name="md-star-outline"></ion-icon>
+        Favorito
+
+      </button>
+    </ion-buttons>
+    <ion-buttons end rigth>
+      <button ion-button icon-left color="royal">
+
+        <ion-icon name="md-pricetags"></ion-icon>
+        Generar cupón
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

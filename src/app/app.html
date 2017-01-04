@@ -1,0 +1,26 @@
+<ion-menu [content]="content">
+  <ion-content>
+    <ion-list>
+      <ion-item>
+        <button ion-button  round padding icon-left block>
+          <ion-icon name="logo-facebook"></ion-icon> Inicia sesión
+        </button>
+      </ion-item>
+    </ion-list>
+    <ion-list>
+      <ion-item>
+        <ion-icon name="ios-contact" item-left></ion-icon>
+        Perfil
+      </ion-item>
+      <ion-item (click)="preferenciasModal()">
+        <ion-icon name="md-options" item-left ></ion-icon>
+        Preferencias
+      </ion-item>
+      <ion-item>
+        <ion-icon name="md-pricetags" item-left></ion-icon>
+        Mis cupones
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+<ion-nav [root]="rootPage" #content no-border></ion-nav>
