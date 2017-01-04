@@ -31,7 +31,7 @@ export class PromoDetailPage {
   }
 
   ngAfterViewInit() {
-    //this.loadMap();
+    this.loadMap();
   }
 
   loadMap() {
