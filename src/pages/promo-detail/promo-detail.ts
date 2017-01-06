@@ -1,13 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import {
-  GoogleMap,
-  GoogleMapsEvent,
-  CameraPosition,
-  GoogleMapsMarkerOptions,
-  GoogleMapsMarker,
-  GoogleMapsLatLng
-} from 'ionic-native';
+import { Geolocation } from 'ionic-native';
+import { CouponDetailPage } from '../coupon-detail/coupon-detail';
 
 /*
   Generated class for the PromoDetail page.
@@ -15,76 +9,89 @@ import {
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 */
+declare var google: any;
+
 @Component({
   selector: 'page-promo-detail',
   templateUrl: 'promo-detail.html'
 })
 export class PromoDetailPage {
   selectedPromo: any;
-  tabBarElement: any;
-  scrollContentElement: any;
-  map: GoogleMap;
-  scrollTop: any;
+  @ViewChild('map') mapElement: ElementRef;
+  map: any;
+  mainTabBarElement: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.mainTabBarElement = document.querySelector('#main_tabs .tabbar');
     this.selectedPromo = navParams.get('promo');
   }
-
-  ngAfterViewInit() {
+  createCoupon(event, promo) {
+    console.log('hizo clic');
+    this.navCtrl.push(CouponDetailPage, {
+      promo: promo
+    });
+    //    this.navCtrl.setRoot(PromoDetailPage,{
+    //       promo: promo
+    //    });
+  }
+  ionViewDidLoad() {
+    this.mainTabBarElement.style.visibility = 'hidden';
     this.loadMap();
   }
-
+  ionViewWillLeave() {
+    this.mainTabBarElement.style.visibility = 'visible';
+  }
   loadMap() {
+    let latLng = new google.maps.LatLng(-12.0964167, -77.0254246);
 
-    let initialPosition: GoogleMapsLatLng = new GoogleMapsLatLng(-12.0964167, -77.0254246);
-    this.map = new GoogleMap('map', {
-      'backgroundColor': 'white',
-      'controls': {
-        'compass': true,
-        'myLocationButton': true,
-        'indoorPicker': true,
-        'zoom': true
-      },
-      'gestures': {
-        'scroll': true,
-        'tilt': true,
-        'rotate': true,
-        'zoom': true
-      },
-      'camera': {
-        'latLng': initialPosition,
-        'tilt': 30,
-        'zoom': 11,
-        'bearing': 50
+    let mapOptions = {
+      center: latLng,
+      zoom: 13,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    }
+
+    this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
+
+    let marker = new google.maps.Marker({
+      map: this.map,
+      animation: google.maps.Animation.DROP,
+      position: this.map.getCenter()
+    });
+
+    let content = "<h4>Bembos</h4>";
+
+    let infoWindow = new google.maps.InfoWindow({
+      content: content
+    });
+
+    infoWindow.open(this.map, marker);
+    google.maps.event.addListener(marker, 'click', () => {
+      infoWindow.open(this.map, marker);
+    });
+
+  }
+  goToMyPosition() {
+    //chequear esto https://developers.google.com/maps/documentation/javascript/examples/control-custom?hl=es-419
+    Geolocation.getCurrentPosition().then((position) => {
+
+      let latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+
+      let mapOptions = {
+        center: latLng,
+        zoom: 15,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
       }
-    });
-    this.map.on(GoogleMapsEvent.MAP_READY).subscribe(() => {
-      console.log('Map is ready!');
-    });
 
-    // create LatLng object
-
-
-    // create CameraPosition
-    //    let position: CameraPosition = {
-    //      target: ionic,
-    //      zoom: 15,
-    //      tilt: 30
-    //    };
-    //
-    //    // move the map's camera to position
-    //    this.map.moveCamera(position);
-
-    // create new marker
-    let markerOptions: GoogleMapsMarkerOptions = {
-      position: initialPosition,
-      title: this.selectedPromo.title
-    };
-
-    this.map.addMarker(markerOptions)
-      .then((marker: GoogleMapsMarker) => {
-        marker.showInfoWindow();
+      this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
+      let marker = new google.maps.Marker({
+        map: this.map,
+        animation: google.maps.Animation.DROP,
+        position: this.map.getCenter()
       });
+
+    }, (err) => {
+      console.log(err);
+    });
   }
 
 }

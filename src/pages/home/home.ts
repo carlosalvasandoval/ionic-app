@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, Slides } from 'ionic-angular';
 import { PromoDetailPage } from '../promo-detail/promo-detail';
 
 @Component({
@@ -11,9 +11,13 @@ export class HomePage {
   selectedPromo: any;
   promos: Array<{ title: string, subtitle: string, "old-price": number, price: number, "url-logo": string, "url-img": string, moneda: string }>;
 
+  homeSlideOptions = {
+    initialSlide: 0,
+    loop: true
+  };
+
   constructor(public navCtrl: NavController, navParams: NavParams) {
     this.selectedPromo = navParams.get('promo');
-    
     this.promos = [];
     for (let i = 1; i < 11; i++) {
       this.promos.push({
@@ -27,11 +31,14 @@ export class HomePage {
       });
     }
   }
-  
+
   promoTapped(event, promo) {
-     this.navCtrl.push(PromoDetailPage, {
-       promo: promo
-     });
+    this.navCtrl.push(PromoDetailPage, {
+      promo: promo
+    });
+    //    this.navCtrl.setRoot(PromoDetailPage,{
+    //       promo: promo
+    //    });
   }
 
 }

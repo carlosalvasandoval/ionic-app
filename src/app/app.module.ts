@@ -8,6 +8,7 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { ModalPreferenciasPage } from '../pages/modal-preferencias/modal-preferencias';
 import { MainHeaderComponent } from '../components/main-header/main-header';
 import { PromoDetailPage } from '../pages/promo-detail/promo-detail';
+import { CouponDetailPage} from '../pages/coupon-detail/coupon-detail';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { PromoDetailPage } from '../pages/promo-detail/promo-detail';
     TabsPage,
     MainHeaderComponent,
     ModalPreferenciasPage,
-    PromoDetailPage
+    PromoDetailPage,
+    CouponDetailPage
   ],
   imports: [
     IonicModule.forRoot(MyApp, {
@@ -45,7 +47,8 @@ import { PromoDetailPage } from '../pages/promo-detail/promo-detail';
     TabsPage,
     MainHeaderComponent,
     ModalPreferenciasPage,
-    PromoDetailPage
+    PromoDetailPage,
+    CouponDetailPage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
 })

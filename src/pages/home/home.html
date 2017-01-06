@@ -4,7 +4,25 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content >
+<ion-content>
+  <h4 padding>
+    <ion-icon  name="md-trophy"></ion-icon>
+    Recompensa para nuestros afiliados
+  </h4>
+  <ion-slides [options]="homeSlideOptions" id="homeSlide">
+    <ion-slide>
+      <ion-grid>
+        <ion-row>
+          <ion-col width-50>
+            <h1 style="border:1px solid #ccc;">imagen 1</h1>
+          </ion-col>
+          <ion-col width-50>
+             <h1 style="border:1px solid #ccc;">imagen 2</h1>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-slide>
+  </ion-slides>
   <ion-card *ngFor="let promo of promos">
     <ion-grid>
       <ion-row>
