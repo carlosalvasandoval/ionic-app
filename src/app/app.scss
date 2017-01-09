@@ -14,3 +14,45 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+.main_menu{
+  background-color: $ecc_color;
+  ion-item, ion-item-divider{
+    background-color: $ecc_color;
+    color:white;
+  }
+  .item{
+    .item-inner{
+      border: 0;
+    }
+  }
+  .main_menu_body{
+    ion-icon{
+      color:$ecc_icon_border_color;
+    }
+  }
+
+  .list-md .item-block .item-inner{ 
+    border-color: $ecc_icon_border_color;
+  }
+  .list-ios > .item-block:first-child, .list-ios > .item-block:last-child, .list-ios > .item-wrapper:last-child .item-block{
+    border: 0;
+  }
+  .item-md, .item-ios{
+    font-size: 1.4rem;
+  }
+  .label-md,.label-ios{
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  .subcategory .item-md ion-icon[item-left],.subcategory .item-md ion-icon[item-right],
+  .subcategory .item-ios ion-icon[item-left],.subcategory .item-ios ion-icon[item-right]{
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  .subcategory .item-block{
+    min-height: 3.4rem
+  }
+  .item-divider-md,.item-divider-ios{
+    border-bottom: 1px solid #dedede;
+  }
+}

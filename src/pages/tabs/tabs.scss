@@ -1,0 +1,5 @@
+#main_tabs{
+  .tabbar ion-icon:not(.ion-ios-flame-outline):not(.ios-flame):not(md-flame){
+    color :$ecc_color_orange;
+  }
+}

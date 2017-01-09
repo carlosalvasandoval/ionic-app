@@ -1,6 +1,6 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { Geolocation } from 'ionic-native';
+import { Geolocation, GoogleMap, GoogleMapsEvent, GoogleMapsLatLng, GoogleMapsMarkerOptions, GoogleMapsMarker } from 'ionic-native';
 import { CouponDetailPage } from '../coupon-detail/coupon-detail';
 
 /*
@@ -42,34 +42,35 @@ export class PromoDetailPage {
     this.mainTabBarElement.style.visibility = 'visible';
   }
   loadMap() {
-    let latLng = new google.maps.LatLng(-12.0964167, -77.0254246);
-
-    let mapOptions = {
-      center: latLng,
-      zoom: 13,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
-    }
-
-    this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
-
-    let marker = new google.maps.Marker({
-      map: this.map,
-      animation: google.maps.Animation.DROP,
-      position: this.map.getCenter()
-    });
-
-    let content = "<h4>Bembos</h4>";
-
-    let infoWindow = new google.maps.InfoWindow({
-      content: content
-    });
-
-    infoWindow.open(this.map, marker);
-    google.maps.event.addListener(marker, 'click', () => {
-      infoWindow.open(this.map, marker);
-    });
+        let latLng = new google.maps.LatLng(-12.0964167, -77.0254246);
+    
+        let mapOptions = {
+          center: latLng,
+          zoom: 13,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        }
+    
+        this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
+    
+        let marker = new google.maps.Marker({
+          map: this.map,
+          animation: google.maps.Animation.DROP,
+          position: this.map.getCenter()
+        });
+    
+        let content = "<h4>Bembos</h4>";
+    
+        let infoWindow = new google.maps.InfoWindow({
+          content: content
+        });
+    
+        infoWindow.open(this.map, marker);
+        google.maps.event.addListener(marker, 'click', () => {
+          infoWindow.open(this.map, marker);
+        });
 
   }
+
   goToMyPosition() {
     //chequear esto https://developers.google.com/maps/documentation/javascript/examples/control-custom?hl=es-419
     Geolocation.getCurrentPosition().then((position) => {

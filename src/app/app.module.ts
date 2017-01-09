@@ -24,7 +24,7 @@ import { CouponDetailPage} from '../pages/coupon-detail/coupon-detail';
   ],
   imports: [
     IonicModule.forRoot(MyApp, {
-      backButtonText: 'Atrás',
+      backButtonText: '',
       backButtonIcon:'ios-arrow-back',
       iconMode: 'ios',
       tabsHighlight: true,
