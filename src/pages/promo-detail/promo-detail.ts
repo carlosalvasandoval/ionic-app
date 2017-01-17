@@ -1,6 +1,6 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { Geolocation, GoogleMap, GoogleMapsEvent, GoogleMapsLatLng, GoogleMapsMarkerOptions, GoogleMapsMarker } from 'ionic-native';
+import { Geolocation } from 'ionic-native';
 import { CouponDetailPage } from '../coupon-detail/coupon-detail';
 
 /*
@@ -20,13 +20,19 @@ export class PromoDetailPage {
   @ViewChild('map') mapElement: ElementRef;
   map: any;
   mainTabBarElement: any;
+  slideOptions = {
+    initialSlide: 0,
+    loop: true,
+    pager: true,
+    parallax: true,
+    autoplay: 3000
+  };
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.mainTabBarElement = document.querySelector('#main_tabs .tabbar');
     this.selectedPromo = navParams.get('promo');
   }
   createCoupon(event, promo) {
-    console.log('hizo clic');
     this.navCtrl.push(CouponDetailPage, {
       promo: promo
     });
@@ -34,40 +40,52 @@ export class PromoDetailPage {
     //       promo: promo
     //    });
   }
-  ionViewDidLoad() {
+  ionViewWillEnter() {
     this.mainTabBarElement.style.visibility = 'hidden';
     this.loadMap();
   }
   ionViewWillLeave() {
     this.mainTabBarElement.style.visibility = 'visible';
   }
+  validNumber(result) {
+    let isNumber = Number(result);
+    return !isNaN(isNumber);
+  }
   loadMap() {
-        let latLng = new google.maps.LatLng(-12.0964167, -77.0254246);
-    
-        let mapOptions = {
-          center: latLng,
-          zoom: 13,
-          mapTypeId: google.maps.MapTypeId.ROADMAP
-        }
-    
-        this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
-    
-        let marker = new google.maps.Marker({
-          map: this.map,
-          animation: google.maps.Animation.DROP,
-          position: this.map.getCenter()
-        });
-    
-        let content = "<h4>Bembos</h4>";
-    
-        let infoWindow = new google.maps.InfoWindow({
-          content: content
-        });
-    
-        infoWindow.open(this.map, marker);
-        google.maps.event.addListener(marker, 'click', () => {
-          infoWindow.open(this.map, marker);
-        });
+    let latLng = new google.maps.LatLng(-12.0964167, -77.0254246);
+
+    let mapOptions = {
+      center: latLng,
+      zoom: 13,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    }
+
+    this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
+
+    let marker = new google.maps.Marker({
+      map: this.map,
+      animation: google.maps.Animation.DROP,
+      position: this.map.getCenter()
+    });
+
+    let content = "<ion-list>"+
+  "<ion-item>"+
+    "<ion-avatar item-left>"+
+      " <img src='" + this.selectedPromo['url-logo']+"'>"+
+   " </ion-avatar>"+
+    "<h2>"+this.selectedPromo.address+"</h2>"+
+    "telf: "+this.selectedPromo.phone+
+  "</ion-item>"+
+"</ion-list>";
+
+    let infoWindow = new google.maps.InfoWindow({
+      content: content
+    });
+
+    infoWindow.open(this.map, marker);
+    google.maps.event.addListener(marker, 'click', () => {
+      infoWindow.open(this.map, marker);
+    });
 
   }
 

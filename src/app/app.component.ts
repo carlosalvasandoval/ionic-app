@@ -5,7 +5,6 @@ import { ModalPreferenciasPage } from '../pages/modal-preferencias/modal-prefere
 
 import { TabsPage } from '../pages/tabs/tabs';
 
-
 @Component({
   templateUrl: 'app.html'
 })

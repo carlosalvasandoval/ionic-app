@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, Slides } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 import { PromoDetailPage } from '../promo-detail/promo-detail';
+import { Http } from '@angular/http';
+import 'rxjs/add/operator/map';
 
 @Component({
   selector: 'page-home',
@@ -8,28 +10,50 @@ import { PromoDetailPage } from '../promo-detail/promo-detail';
 })
 export class HomePage {
 
-  selectedPromo: any;
-  promos: Array<{ title: string, subtitle: string, "old-price": number, price: number, "url-logo": string, "url-img": string, moneda: string }>;
+  //selectedPromo: any;
+  prizes: any;
+  promos: Array<
+  {
+    id: number,
+    title: string,
+    subtitle: string,
+    "old-price": any,
+    price: any,
+    "url-logo": string,
+    "url-img": string,
+    moneda: string,
+    address: string
+    phone: string
+  }>;
 
   homeSlideOptions = {
     initialSlide: 0,
     loop: true
   };
 
-  constructor(public navCtrl: NavController, navParams: NavParams) {
-    this.selectedPromo = navParams.get('promo');
+  constructor(public navCtrl: NavController, navParams: NavParams, public http: Http) {
+    //this.selectedPromo = navParams.get('promo');
     this.promos = [];
-    for (let i = 1; i < 11; i++) {
-      this.promos.push({
-        moneda: 'S/.',
-        title: 'Te presentamos la nueva bembos "abusiva" ',
-        subtitle: 'Solo hasta el 28 de febrero llévala a solo 6.9',
-        "old-price": 17.9,
-        price: 6.9,
-        "url-logo": "",
-        "url-img": ""
-      });
+    this.prizes = [];
+    let randTextFooter = ['ESTUDIOS DEL MERCADO DEL CONSUMIDOR ONLINE PERUANO',
+      'DOMINIO, HOSTING Y EMAILS CORPORATIVOS'];
+    for (let i = 1; i < 7; i++) {
+      if (i % 2 == 1) {
+        this.prizes.push({
+          imgSrc1: "assets/img/img_" + i + ".jpg",
+          imgSrc2: "assets/img/img_" + (i + 1) + ".jpg",
+          footerText1: randTextFooter[Math.round(Math.random())],
+          footerText2: randTextFooter[Math.round(Math.random())]
+
+        });
+      }
+
     }
+
+    this.http.get('assets/data-json/anuncios.json').map(res => res.json()).subscribe(data => {
+      this.promos = data;
+    });
+
   }
 
   promoTapped(event, promo) {
@@ -40,5 +64,12 @@ export class HomePage {
     //       promo: promo
     //    });
   }
+  validNumber(result) {
+    let isNumber = Number(result);
+    return !isNaN(isNumber);
+  }
+
+ 
+
 
 }

@@ -4,6 +4,7 @@ page-promo-detail {
   }
   #map {
     height: 300px;
+    margin-top: 3rem;
   }
   .bottom_bar
   {
@@ -11,7 +12,32 @@ page-promo-detail {
     bottom: 2vh;
     width: 100%;
   }
+  .detail_seccion{
+    text-align: justify;
+  }
+  .detail_seccion {
+    white-space: pre-wrap;
+  }
+  .header_seccion{
+    margin-bottom: 0.5rem
+  }
+  .precios{
+    color: #FFF
+  }
+  .precio{
+    font-size: 2.4rem
+  }
+  .precio_old{
+
+    font-style: italic;
+    font-size: 1.2rem;
+    text-decoration: line-through
+  }
+  .precio_old_no_line{
+    font-style: italic;
+    font-size: 1.2rem;
+  }
 }
 ion-app._gmaps_cdv_ .nav-decor{
-    background-color: transparent !important;
+  background-color: transparent !important;
 }

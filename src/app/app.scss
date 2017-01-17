@@ -25,11 +25,20 @@
       border: 0;
     }
   }
+  .list-ios[inset] .item {
+    border-bottom: 0;
+  }
   .main_menu_body{
     ion-icon{
       color:$ecc_icon_border_color;
     }
   }
+  .main_menu_header{
+    [icon-left] ion-icon {
+      font-size: 2.2em;
+    }
+  }
+
 
   .list-md .item-block .item-inner{ 
     border-color: $ecc_icon_border_color;

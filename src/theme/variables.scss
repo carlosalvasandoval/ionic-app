@@ -27,6 +27,11 @@ $ecc_color_orange : #FF6900;
 $ecc_icon_border_color: #BCBABD;
 $ecc_white: #FFFFFF;
 $ecc_content_background:#F3F2F0;
+$fb_color:#24589A;
+$ln_color:#0074AE;
+$regular:#4E4951;
+$naranja:#FF6902;
+
 $colors: (
 primary:    #387ef5,
 secondary:  #32db64,
@@ -34,7 +39,11 @@ danger:     #f53d3d,
 light:      #f4f4f4,
 dark:       #222,
 ecc:        $ecc_color,
-white:      $ecc_white
+white:      $ecc_white,
+facebook:   $fb_color,
+linkedin:   $ln_color,
+regular:    $regular,
+naranja:    $naranja
 );
 
 

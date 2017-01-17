@@ -1,9 +1,89 @@
 page-home {
+  .card-content{
+    padding: 0;
+  }
+  .main_price{
+    color:$naranja;
+    font-style: italic;
+    font-size: 1.7rem;
+  }
+  .old_price{
+    font-size: 1.2rem;
+    text-decoration: line-through
+  }
+  .img_logo img{
+    height: 3.5rem;
+    width: auto;
+    margin:1rem;
+  }
+  .descuento_container{
+    position: relative;
+  }
+  .descuento_container .img_container img{
+    width: 7.0rem;
+    height: auto;
+    top:-0.6rem;
+    right: 0.8rem;
+    position: absolute;
+  }
+  .footer_anuncio_text{
+    background: rgba(0, 0, 0, 0.6);
+    position: absolute;
+    bottom: 0;
+    box-sizing: border-box;
+    padding: 0.8rem;
+    color: white;
+    font-size: 1.5rem;
+    width:100%;
+    text-align: justify; 
+  }
+  .descuento{
+    width: 7.0rem;
+    height: auto;
+    top:-0.5rem;
+    right: 0.4rem;
+    position: absolute;
+    color: $ecc_white;
+    text-align: center;
+    font-weight: bold;
+  }
+  .descuento_primera_linea{
+    text-align: center;
+    font-size: 1.2rem
+  }
+  .descuento_segunda_linea{
+    text-align: center;
+    font-size: 2.5rem;
+  }
   #homeSlide{
-    height: 15%;
+    height: 25%;
+    img{
+      height: auto;
+      width:100%;
+    }
+    ion-col{
+      position: relative;
+    }
   }
   .content{
     background-color: $ecc_content_background;
   }
-  
+  .footer_prize_text{
+    background: rgba(0, 0, 0, 0.6);
+    position: absolute;
+    bottom: 22px;
+    box-sizing: border-box;
+    padding: 10px;
+    color: white;
+    font-size: 12px;
+    width: -webkit-calc(100% - 10px);
+    width:    -moz-calc(100% - 10px);
+    width:         calc(100% - 10px);
+  }
+  #trofeo,#color_tags{
+    height:2.8rem;
+    margin-right:10px;
+    vertical-align:middle;
+  }
+
 }

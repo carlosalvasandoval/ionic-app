@@ -5,5 +5,23 @@
 </ion-header>
 
 <ion-content padding>
+  <div *ngFor="let promo of promos;">
+    <div *ngIf = "promo.id == eleChosen && isShown">
+      <ion-list>
+        <ion-item>
+          <ion-thumbnail item-left>
+            <img src="{{promo['url-img'][0]}}">
+          </ion-thumbnail>
+          <h2>{{promo.title}}</h2>
+          <p>{{promo.subtitle}}
+            <br>
+            <b>{{promo.moneda}} {{promo.price}}</b> 
+          </p>
+          <button ion-button clear item-right (click)="promoTapped($event, promo)">Ver</button>
 
+        </ion-item>
+      </ion-list>
+    </div>
+</div>
+  
 </ion-content>

@@ -1,58 +1,75 @@
-<ion-header>
-  <ion-navbar>
-    <button menuToggle *ngIf="!selectedPromo">
-            <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>Detalle de promoción</ion-title>
+<ion-header no-border>  
+  <ion-navbar color="ecc">
+    <main-header></main-header>
   </ion-navbar>
 </ion-header>
 
 <ion-content color="light">
 
-  <h4 text-center *ngIf="selectedPromo">
-      <b>{{selectedPromo.title}}</b>
-  </h4>
-
   <ion-card>
-    <ion-card-header>
-      ¿DÓNDE CANJEARLO?
-    </ion-card-header>
+    <div *ngIf="selectedPromo['url-img'].length > 1">
+      <ion-slides [options]="slideOptions" id="homeSlide">
+        <ion-slide *ngFor="let promo of selectedPromo['url-img'];let i = index">
+          <img src="{{selectedPromo['url-img'][i]}}" width="100%"/>
+        </ion-slide>
+      </ion-slides>
+
+    </div>
+    <div *ngIf="selectedPromo['url-img'].length == 1">
+      <img src="{{selectedPromo['url-img'][0]}}" width="100%"/>
+    </div>
+    <ion-grid>
+      <ion-row>
+        <ion-col width-67>
+          <ion-icon name="md-pin"></ion-icon> {{selectedPromo.address}}
+        </ion-col>
+        <ion-col width-33>
+          <ion-icon name="md-call"></ion-icon> {{selectedPromo.phone}}
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+
     <ion-card-content>
-<!--      <button ion-button (click)="goToMyPosition()"><ion-icon name="md-locate"></ion-icon>Mi ubicación</button>-->
+      <hr>
+      <div *ngFor="let seccion of selectedPromo.secciones;let i = index" margin-bottom>
+        <h4 color="naranja" class="header_seccion">{{seccion.key}}</h4>
+        <p class="detail_seccion">{{seccion.value}}</p>
+      </div>
+      <hr>
+      <h4 color="naranja" class="header_seccion">REGLAS CLARAS, CONFIANZA ONLINE</h4>
+      <p class="detail_seccion">{{selectedPromo.reglas}}</p>
+      <!--      <button ion-button (click)="goToMyPosition()"><ion-icon name="md-locate"></ion-icon>Mi ubicación</button>-->
       <div #map id="map"></div>
-    </ion-card-content>
-  </ion-card>
-  <ion-card>
-    <ion-card-header>
-      ¿CUÁL ES LA OFERTA PARA TI?
-    </ion-card-header>
-    <ion-card-content>
-    </ion-card-content>
-  </ion-card>
-
-  <ion-card>
-    <ion-card-header>
-      REGLAS CLARAS, CONFIANZA ONLINE
-    </ion-card-header>
-    <ion-card-content>
     </ion-card-content>
   </ion-card>
 
 </ion-content>
 <ion-footer>
-  <ion-toolbar color="royal">
-    <ion-buttons start left>
-      <button ion-button icon-left color="royal">
-        <ion-icon name="md-star-outline"></ion-icon>
-        Favorito
+  <ion-toolbar color="ecc">
+    <ion-grid>
+      <ion-row>
+        <ion-col width-50 class="precios">
+          <div class="precio" *ngIf="validNumber(selectedPromo.price)">
+            {{selectedPromo.moneda}} {{selectedPromo.price}}
+          </div>
+          <div class="precio" *ngIf="validNumber(selectedPromo.price)==false">
+            {{selectedPromo.price}}
+          </div>
+          <div class="precio_old" *ngIf="validNumber(selectedPromo['old-price'])">
+            {{selectedPromo.moneda}} {{selectedPromo['old-price']}}
+          </div>
+          <div class="precio_old_no_line" *ngIf="!validNumber(selectedPromo['old-price'])">
+             {{selectedPromo['old-price']}}
+          </div>
+        </ion-col>
+        <ion-col width-50>
+          <button ion-button full color="naranja" (click)="createCoupon($event, selectedPromo)"> 
+                  ¡Lo quiero!
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
-      </button>
-    </ion-buttons>
-    <ion-buttons end rigth>
-      <button ion-button icon-left color="royal" (click)="createCoupon($event, selectedPromo)">
-        <ion-icon name="md-pricetags" ></ion-icon>
-        Generar cupón
-      </button>
-    </ion-buttons>
-  </ion-toolbar>
+</ion-toolbar>
 </ion-footer>

@@ -2,9 +2,23 @@
   <ion-content class="main_menu">
     <ion-list class="main_menu_header" inset>
       <ion-item>
-        <button ion-button  round padding icon-left block>
-          <ion-icon name="logo-facebook"></ion-icon> Inicia sesión
+        <button ion-button full padding  icon-left  color="facebook" medium>
+          <ion-icon name="logo-facebook"></ion-icon> | Inicia sesión con Facebook
         </button>
+      </ion-item>
+      <ion-item>
+        <button ion-button full padding  icon-left  color="linkedin" medium>
+          <ion-icon name="logo-linkedin"></ion-icon> | Inicia sesión con LinkedIn
+        </button>
+      </ion-item>
+      <ion-item>
+        <button ion-button full padding   color="regular" medium>
+          Registrarse
+        </button>
+      </ion-item>
+      <ion-item>   
+        <ion-checkbox  color="dark"  ></ion-checkbox>
+        <ion-label>He leído y acepto las condiciones</ion-label>
       </ion-item>
     </ion-list>
 
@@ -13,10 +27,10 @@
         <ion-icon name="{{category.icon}}" item-left></ion-icon>
         {{category.title}}
       </ion-item-divider>
-                    <div *ngIf="category.showDetails && isShown(category)" class="subcategory">
+      <div *ngIf="category.showDetails && isShown(category)" class="subcategory">
         <ion-item  *ngFor="let detail of category.details" no-border>
           <ion-icon name="" item-left></ion-icon> {{detail}}
-         
+
         </ion-item>
       </div>
     </ion-item-group>

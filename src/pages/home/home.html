@@ -5,58 +5,76 @@
 </ion-header>
 
 <ion-content>
-  <h4 padding>
-    <ion-icon  name="md-trophy"></ion-icon>
-    Recompensa para nuestros afiliados
-  </h4>
+  <p padding>
+    <img src="assets/icon/trofeo.png" id="trofeo">
+    Recompensas para nuestros afiliados
+  </p>
+
   <ion-slides [options]="homeSlideOptions" id="homeSlide">
-    <ion-slide>
+    <ion-slide *ngFor="let prize of prizes">
       <ion-grid>
-        <ion-row>
-          <ion-col width-50>
-            <h1 style="border:1px solid #ccc;">imagen 1</h1>
+        <ion-row >
+          <ion-col width-50 class="img_container">
+            <img src="{{prize.imgSrc1}}" >
+            <div class="footer_prize_text">{{prize.footerText1}}</div>
           </ion-col>
-          <ion-col width-50>
-             <h1 style="border:1px solid #ccc;">imagen 2</h1>
+          <ion-col width-50 class="img_container">
+            <img src="{{prize.imgSrc2}}">
+            <div class="footer_prize_text">{{prize.footerText2}}</div>
           </ion-col>
         </ion-row>
       </ion-grid>
     </ion-slide>
   </ion-slides>
+  <p padding>
+    <img src="assets/icon/color_tags.png" id="color_tags">
+    Las mejores ofertas de tu ciudad por tí
+  </p>
+
   <ion-card *ngFor="let promo of promos">
-    <ion-grid>
-      <ion-row>
-        <ion-col width-20>
-          <img src="http://www.abanoservicios.com/wp-content/uploads/2014/03/bembos.png" width="100%"/>
-        </ion-col>
-        <ion-col width-60></ion-col>
-        <ion-col width-20>
-          <h1>{{(100-promo.price/promo['old-price']*100).toFixed(0)}} %</h1>
-          OFF
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-    <img src="http://cdn7.larepublica.pe/sites/default/files/styles/img_620/public/imagen/2016/07/12/hamburguesas-Noticia-784896.jpg"/>
+    <div class="img_logo">
+      <img src="{{promo['url-logo']}}" width="100%"/>
+    </div>
+    <div class="descuento_container">
+      <img src="{{promo['url-img'][0]}}" />
+      <div class="img_container">
+        <img src="assets/img/descuento_image.png" />
+        <div class="footer_anuncio_text">{{promo.title}}</div>
+      </div>
+      <div class="descuento">
+        <div *ngIf="validNumber(promo.price) && validNumber(promo['old-price'])">
+          <div class="descuento_primera_linea">dscto</div>
+          <div class="descuento_segunda_linea">{{(100-promo.price/promo['old-price']*100).toFixed(0)}}%</div>
+        </div>
+        <div *ngIf="!validNumber(promo.price) || !validNumber(promo['old-price'])">
+          Mejor
+          Precio
+        </div>
+
+      </div>
+    </div>
     <ion-card-content>
-      <ion-card-title>
-        {{promo.title}}
-      </ion-card-title>
-      <p>
-        {{promo.subtitle}}
-      </p>
       <ion-row>
         <ion-col>
           <ion-item>
-            <h2 style="color: red">{{promo.moneda}} {{promo.price}}</h2>
-            <p style="text-decoration: line-through">{{promo.moneda}} {{promo['old-price']}}</p>
-          </ion-item>
-        </ion-col>
+            <h2  class="main_price">{{promo.moneda}} {{promo.price}}</h2>
+            <p  class="old_price" *ngIf="!validNumber(promo.price) || !validNumber(promo['old-price'])">
+              {{promo['old-price']}}
+            </p>
+            <p  class="old_price" *ngIf="validNumber(promo.price) && validNumber(promo['old-price'])">
+                {{promo.moneda}} {{promo['old-price']}}
+          </p>
+        </ion-item>
+      </ion-col>
 
-        <ion-col center text-center>
-          <button ion-button color="secondary" (click)="promoTapped($event, promo)">Lo quiero</button>
-        </ion-col>
-      </ion-row>
-    </ion-card-content>
+      <ion-col center text-center>
+        <button ion-button color="naranja" (click)="promoTapped($event, promo)" icon-left small>
+                <ion-icon name="md-pricetags"></ion-icon>
+          {{promo.cupones}} Cupones
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-card-content>
 
-  </ion-card>
+</ion-card>
 </ion-content>
